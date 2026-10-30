@@ -310,12 +310,12 @@ const GlowCursor = ({
   clickBurst = true,
   quality = 'high',
   theme = 'dark',
-  blendMode,
+  blendMode = undefined,
   maxDevicePixelRatio = 2,
   enabled = true,
   children,
   className = '',
-  style,
+  style = undefined,
   ...rest
 }) => {
   const containerRef = useRef(null);
