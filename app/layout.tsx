@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.gravio.ae"),
   title: "Gravio — Launching Soon",
   description:
     "Gravio is a social media marketing and branding agency. We're launching soon.",

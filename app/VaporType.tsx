@@ -53,15 +53,23 @@ export default function VaporType({
     let dpr = 1;
     let particles: Particle[] = [];
 
+    const PAD_X = 260;
+    const PAD_Y = 260;
+
     const buildParticles = () => {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = Math.max(1, container.clientWidth);
-      const fontSize = Math.max(minFontSize, Math.min(maxFontSize, width / (text.length * 0.72)));
-      height = Math.ceil(fontSize * 1.5);
+      const textWidth = Math.max(1, container.clientWidth);
+      const fontSize = Math.max(minFontSize, Math.min(maxFontSize, textWidth / (text.length * 0.72)));
+      const tightHeight = Math.ceil(fontSize * 1.5);
+      width = textWidth + PAD_X * 2;
+      height = tightHeight + PAD_Y * 2;
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
+      canvas.style.left = `${-PAD_X}px`;
+      canvas.style.top = `${-PAD_Y}px`;
+      container.style.height = `${tightHeight}px`;
 
       const off = document.createElement("canvas");
       off.width = width;
@@ -76,7 +84,7 @@ export default function VaporType({
       octx.fillText(text, width / 2, height / 2);
 
       const data = octx.getImageData(0, 0, width, height).data;
-      const step = Math.max(2, Math.round(width / 420));
+      const step = Math.max(2, Math.round(textWidth / 420));
       const pts: { x: number; y: number }[] = [];
       for (let y = 0; y < height; y += step) {
         for (let x = 0; x < width; x += step) {
@@ -186,7 +194,19 @@ export default function VaporType({
       >
         {text}
       </Tag>
-      <canvas ref={canvasRef} aria-hidden style={{ display: "block", width: "100%" }} />
+      <canvas
+        ref={canvasRef}
+        aria-hidden
+        style={{
+          position: "absolute",
+          display: "block",
+          pointerEvents: "none",
+          maskImage:
+            "radial-gradient(ellipse 60% 55% at 50% 50%, #000 55%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 60% 55% at 50% 50%, #000 55%, transparent 100%)",
+        }}
+      />
     </div>
   );
 }
