@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const DOT_COLOR = "182, 240, 198";
+const DOT_COLOR = "10, 92, 45";
 const LINE_DIST = 140;
 const DOT_COUNT_DIVISOR = 3200;
 
@@ -45,8 +45,8 @@ export default function CanvasBackground() {
       if (!ctx) return;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       const gradient = ctx.createLinearGradient(0, 0, 0, height);
-      gradient.addColorStop(0, "#0a2416");
-      gradient.addColorStop(1, "#05130c");
+      gradient.addColorStop(0, "transparent");
+      gradient.addColorStop(1, "transparent");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
@@ -99,7 +99,7 @@ export default function CanvasBackground() {
     <canvas
       ref={canvasRef}
       aria-hidden
-      className="pointer-events-none absolute inset-0"
+      className="pointer-events-none fixed inset-0 -z-10"
     />
   );
 }

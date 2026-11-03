@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Gravio — Launching Soon";
+export const alt = "Gravio - Launching Soon";
 export const size = {
   width: 1200,
   height: 630,
