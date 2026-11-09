@@ -13,40 +13,34 @@ export const CONTACT = {
 export const FOOTER_ABOUT =
   "Gravio is a modern agency in Dubai focused on building brands through strategy, design, and marketing, creating systems that drive clarity, consistency, and real growth.";
 
-export const NAV_LINKS = [
+// Sections switched off for now. Set to true to bring a section back everywhere:
+// its home page block, its page, its nav and footer links, and its sitemap entry.
+export const FEATURES = { work: false, blog: false };
+
+const HIDDEN_PATHS = [...(FEATURES.work ? [] : ["/work/"]), ...(FEATURES.blog ? [] : ["/blog/"])];
+export const isHidden = (href: string) => HIDDEN_PATHS.includes(href);
+const visible = <T extends { href: string }>(links: T[]) => links.filter((l) => !isHidden(l.href));
+
+export const NAV_LINKS = visible([
   { label: "Home", href: "/", desktopOnly: true },
   { label: "Services", href: "/services/" },
   { label: "Work", href: "/work/", desktopOnly: true },
   { label: "About", href: "/about/" },
   { label: "Blog", href: "/blog/", desktopOnly: true },
   { label: "Career", href: "/career/", desktopOnly: true },
-];
+]);
 
 export const PAGE_GROUPS = {
   main: {
     title: "Main Pages",
-    links: [
+    links: visible([
       { label: "About", href: "/about/" },
       { label: "Work", href: "/work/" },
       { label: "Services", href: "/services/" },
-          { label: "Blog", href: "/blog/" },
+      { label: "Blog", href: "/blog/" },
       { label: "Career", href: "/career/" },
       { label: "Contact", href: "/contact/" },
-    ],
-  },
-  cms: {
-    title: "CMS Pages",
-    links: [
-      { label: "Work Details", href: "/work/" },
-      { label: "Blog Details", href: "/blog/" },
-    ],
-  },
-  utility: {
-    title: "Utility Pages",
-    links: [
-      { label: "404", href: "/404/" },
-      { label: "Coming Soon", href: "/coming-soon/" },
-    ],
+    ]),
   },
   legal: {
     title: "Legal",

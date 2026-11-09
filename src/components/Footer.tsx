@@ -26,7 +26,7 @@ export function Footer() {
     // No newsletter service is connected yet, so the visitor's own mail app sends the request.
     window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent("Newsletter subscription")}&body=${encodeURIComponent(`Please subscribe ${email}`)}`;
   };
-  const cols = [PAGE_GROUPS.main, PAGE_GROUPS.cms, PAGE_GROUPS.utility, PAGE_GROUPS.legal, PAGE_GROUPS.social];
+  const cols = [PAGE_GROUPS.main, PAGE_GROUPS.legal, PAGE_GROUPS.social];
 
   return (
     <footer className="footer">

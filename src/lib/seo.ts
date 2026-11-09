@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CONTACT } from "./content";
+import { CONTACT, isHidden } from "./content";
 
 export const SITE_URL = "https://www.gravio.ae";
 export const SITE_NAME = "Gravio";
@@ -40,7 +40,7 @@ export function pageMeta({
 }
 
 /** Pages listed in the sitemap. Placeholder pages marked noindex are left out. */
-export const INDEXED_PAGES = ["/", "/services/", "/work/", "/about/", "/contact/", "/career/"];
+export const INDEXED_PAGES = ["/", "/services/", "/work/", "/about/", "/contact/", "/career/", "/privacy-policy/", "/terms-condition/"].filter((p) => !isHidden(p));
 
 /** schema.org description of the business, rendered once in the root layout. */
 export const ORGANIZATION_JSONLD = {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMeta } from "@/lib/seo";
+import { FEATURES } from "@/lib/content";
 import { MapEmbed } from "@/components/MapEmbed";
 import { HomeHero } from "@/components/pageTops";
 import { Blog, Clients, Cta, Faq, Process, Services, Testimonials, Values, Work } from "@/components/sections";
@@ -18,10 +19,10 @@ export default function Home() {
       <Process />
       <Values />
       <Services />
-      <Work />
+      {FEATURES.work && <Work />}
       <Testimonials />
       <Faq />
-      <Blog />
+      {FEATURES.blog && <Blog />}
       <Cta />
       <MapEmbed />
     </>
