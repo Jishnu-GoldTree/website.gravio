@@ -3,7 +3,7 @@ import { pageMeta } from "@/lib/seo";
 import { FEATURES } from "@/lib/content";
 import { MapEmbed } from "@/components/MapEmbed";
 import { HomeHero } from "@/components/pageTops";
-import { Blog, Clients, Cta, Faq, Process, Services, Testimonials, Values, Work } from "@/components/sections";
+import { Blog, Cta, Faq, Process, Services, Testimonials, Values, Work } from "@/components/sections";
 
 export const metadata: Metadata = pageMeta({
   path: "/",
@@ -15,7 +15,6 @@ export default function Home() {
   return (
     <>
       <HomeHero />
-      <Clients />
       <Process />
       <Values />
       <Services />

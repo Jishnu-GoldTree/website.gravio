@@ -62,6 +62,7 @@ export const ORGANIZATION_JSONLD = {
     addressCountry: "AE",
   },
   areaServed: ["AE", "IN"],
+  sameAs: ["https://www.instagram.com/graviomarketing"],
   contactPoint: [
     { "@type": "ContactPoint", telephone: CONTACT.phone.replace(/\s/g, ""), contactType: "sales", areaServed: "AE", availableLanguage: ["en"] },
     { "@type": "ContactPoint", telephone: CONTACT.landline.replace(/\s/g, ""), contactType: "customer service", areaServed: "AE", availableLanguage: ["en"] },

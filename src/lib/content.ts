@@ -52,10 +52,7 @@ export const PAGE_GROUPS = {
   social: {
     title: "Social Links",
     links: [
-      { label: "Facebook", href: "https://www.facebook.com/" },
-      { label: "Instagram", href: "https://www.instagram.com/" },
-      { label: "Twitter / X", href: "https://x.com/" },
-      { label: "LinkedIn", href: "https://www.linkedin.com/" },
+      { label: "Instagram", href: "https://www.instagram.com/graviomarketing" },
     ],
   },
 };
@@ -89,12 +86,6 @@ export const PLACES = ["SINCE 2020", "DUBAI", "UAE", "INDIA"];
 
 export const MANIFESTO =
   "We are distinct, never derivative. Every brand we touch gets a strategy of its own, shaped with data, and executed with care, until the numbers genuinely shift.";
-
-export const CLIENTS_TEXT = [
-  "Worked with 120+ brands across multiple industries",
-  "Brand • Ecommerce • Service • Local Businesses",
-];
-
 
 export const PROCESS_TEXT =
   "A clear four step framework that replaces guesswork with steady, measurable growth.";

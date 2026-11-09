@@ -7,7 +7,6 @@ import {
   ABOUT,
   BLOG,
   BLOG_TEXT,
-  CLIENTS_TEXT,
   CTA,
   FAQ_TABS,
   FAQ_TEXT,
@@ -47,23 +46,6 @@ function Head({ title, text, tag = "h2" }: { title: ReactNode; text?: string; ta
       <T className="h1">{title}</T>
       {text && <p className="lead">{text}</p>}
     </Reveal>
-  );
-}
-
-/* ---------- Clients ---------- */
-
-export function Clients() {
-  return (
-    <section className="clients">
-      <div className="clients-inner">
-      <div className="wrap split-head">
-        <Reveal><h2 className="h1">Our Clients</h2></Reveal>
-        <Reveal delay={0.1} className="split-side clients-side">
-          <p className="lead">{CLIENTS_TEXT[0]} <br />{CLIENTS_TEXT[1]}</p>
-        </Reveal>
-      </div>
-      </div>
-    </section>
   );
 }
 
@@ -179,62 +161,41 @@ export function Values() {
 
 export function Services() {
   const desktop = useIsDesktop();
-  const [active, setActive] = useState(0);
   return (
     <section className="services">
       <Head title="What we offer / Service" text={SERVICES_TEXT} />
       <div className="service-list">
-        {SERVICES.map((s, i) => {
-          const on = desktop && active === i;
-          return (
-            <motion.div
-              key={s.n}
-              className={`service-row`}
-              onMouseEnter={() => setActive(i)}
-              initial={false}
-              animate={desktop ? { height: on ? 580 : 183.5 } : { height: "auto" }}
-              transition={uiSpring}
-            >
-              <motion.div className="service-bg" initial={false} animate={{ opacity: on ? 1 : 0 }} transition={uiSpring}>
-                <Art kind="streak" className="fill" alt="" />
-              </motion.div>
-              <div className="service-inner">
-                <motion.p className="service-num" initial={false} animate={{ color: on ? "#ffffff" : "#0b2e1a" }} transition={uiSpring}>{s.n}</motion.p>
-                {desktop && (
-                  <div className="service-photo">
-                    <AnimatePresence initial={false}>
-                      {on && (
-                        <motion.div className="fill" initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.92 }} transition={uiSpring}>
-                          <Art kind={s.art} className="fill" />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                )}
-                <div className="service-main">
-                  <div className="service-top">
-                    <div>
-                      <motion.p className="service-kicker" initial={false} animate={{ color: on ? "#ffffff" : "#404040" }} transition={uiSpring}>{s.kicker}</motion.p>
-                      <motion.h2 className="h2" initial={false} animate={{ color: on ? "#ffffff" : "#0b2e1a" }} transition={uiSpring}>{s.title}</motion.h2>
-                    </div>
-                    <Button href="/contact/" label="Start your project" variant={on ? "onDark" : "primary"} />
-                  </div>
-                  <AnimatePresence initial={false}>
-                  {on && (
-                    <motion.div className="service-more" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 30 }} transition={uiSpring}>
-                      <div className="service-stat"><h2>{s.stat}</h2><h3>{s.statLabel}</h3></div>
-                      <p className="service-text">{s.text}</p>
-                      <div className="service-chips">
-                        {s.chips.map((c) => <h3 key={c} className="service-chip">{c}</h3>)}
-                      </div>
-                    </motion.div>
-                  )}
-                  </AnimatePresence>
+        {SERVICES.map((s) => (
+          <div key={s.n} className="service-row service-open" style={{ height: desktop ? 580 : "auto" }}>
+            <div className="service-bg">
+              <Art kind="streak" className="fill" alt="" />
+            </div>
+            <div className="service-inner">
+              <p className="service-num">{s.n}</p>
+              {desktop && (
+                <div className="service-photo">
+                  <Art kind={s.art} className="fill" />
                 </div>
+              )}
+              <div className="service-main">
+                <div className="service-top">
+                  <div>
+                    <p className="service-kicker">{s.kicker}</p>
+                    <h2 className="h2">{s.title}</h2>
+                  </div>
+                  <Button href="/contact/" label="Start your project" variant="onDark" />
+                </div>
+                <Reveal className="service-more">
+                  <div className="service-stat"><h2>{s.stat}</h2><h3>{s.statLabel}</h3></div>
+                  <p className="service-text">{s.text}</p>
+                  <div className="service-chips">
+                    {s.chips.map((c) => <h3 key={c} className="service-chip">{c}</h3>)}
+                  </div>
+                </Reveal>
               </div>
-            </motion.div>
-          );
-        })}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -519,9 +480,6 @@ function Person({ p, i }: { p: (typeof ABOUT.people)[number]; i: number }) {
       <motion.div className="person-photo" initial="rest" animate="rest" whileHover="hover">
         <motion.div className="fill" variants={{ rest: { scale: 1 }, hover: { scale: 1.05 } }} transition={uiSpring}>
           <Avatar seed={p.name} className="fill" />
-        </motion.div>
-        <motion.div className="person-social" variants={{ rest: { opacity: 0, y: 64 }, hover: { opacity: 1, y: 0 } }} transition={uiSpring}>
-          {["in", "ig", "x"].map((s) => <Icon key={s} name={`soc-${s}`} size={40} alt="" />)}
         </motion.div>
       </motion.div>
       <h3 className="h3">{p.name}</h3>
