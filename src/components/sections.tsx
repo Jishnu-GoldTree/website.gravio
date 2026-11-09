@@ -7,14 +7,10 @@ import {
   ABOUT,
   BLOG,
   BLOG_TEXT,
-  CLIENT_LOGOS,
   CLIENTS_TEXT,
-  COMPARE,
   CTA,
   FAQ_TABS,
   FAQ_TEXT,
-  PLANS,
-  PRICING_TEXT,
   PROCESS,
   PROCESS_TEXT,
   PROJECTS,
@@ -27,8 +23,9 @@ import {
   WORK_TEXT,
 } from "@/lib/content";
 import { Art, Icon } from "./Art";
+import { Avatar } from "./Avatar";
 import { Button, FakeButton } from "./Button";
-import { CountUp, Reveal, SlowFloat, Ticker, uiSpring } from "./motion";
+import { CountUp, Reveal, SlowFloat, uiSpring } from "./motion";
 
 /** True once the screen is wide enough for the desktop layout. */
 function useIsDesktop(min = 1200) {
@@ -43,7 +40,7 @@ function useIsDesktop(min = 1200) {
   return desktop;
 }
 
-function Head({ title, text, tag = "h1" }: { title: ReactNode; text?: string; tag?: "h1" | "h2" }) {
+function Head({ title, text, tag = "h2" }: { title: ReactNode; text?: string; tag?: "h1" | "h2" }) {
   const T = tag;
   return (
     <Reveal className="head-center">
@@ -55,28 +52,16 @@ function Head({ title, text, tag = "h1" }: { title: ReactNode; text?: string; ta
 
 /* ---------- Clients ---------- */
 
-function LogoMark({ i }: { i: number }) {
-  return <Icon name={`mark${i % 5}`} size={48} className="logo-mark" />;
-}
-
 export function Clients() {
   return (
     <section className="clients">
       <div className="clients-inner">
       <div className="wrap split-head">
-        <Reveal><h1 className="h1">Our Clients</h1></Reveal>
+        <Reveal><h2 className="h1">Our Clients</h2></Reveal>
         <Reveal delay={0.1} className="split-side clients-side">
           <p className="lead">{CLIENTS_TEXT[0]} <br />{CLIENTS_TEXT[1]}</p>
         </Reveal>
       </div>
-      <Ticker gap={20} className="clients-strip">
-        {CLIENT_LOGOS.map((name, i) => (
-          <li key={name} className="client-card">
-            <LogoMark i={i} />
-            <span>{name}</span>
-          </li>
-        ))}
-      </Ticker>
       </div>
     </section>
   );
@@ -88,7 +73,7 @@ function ProcessCard({ p, i }: { p: (typeof PROCESS)[number]; i: number }) {
   return (
     <div className={`process-card`}>
       <Art kind={`flame${i + 1}`} className="fill" />
-      <h1 className="process-num">{p.n}</h1>
+      <p className="process-num">{p.n}</p>
       <div className="process-body">
         <h3 className="h3">{p.title}</h3>
         <p>{p.text}</p>
@@ -97,8 +82,8 @@ function ProcessCard({ p, i }: { p: (typeof PROCESS)[number]; i: number }) {
   );
 }
 
-export function Process() {
-  const desktop = useIsDesktop();
+/** Phone layout: cards slide sideways as the page scrolls. Lives apart so its scroll target always exists. */
+function ProcessPhone() {
   const trackBox = useRef<HTMLDivElement>(null);
   const list = useRef<HTMLDivElement>(null);
   const [travel, setTravel] = useState(0);
@@ -111,18 +96,37 @@ export function Process() {
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, [desktop]);
+  }, []);
 
   const { scrollYProgress } = useScroll({ target: trackBox, offset: ["start 120px", "end 688px"] });
   const rawX = useTransform(scrollYProgress, [0, 1], [0, -travel]);
   const x = useSpring(rawX, { stiffness: 500, damping: 60 });
 
   return (
+    <div ref={trackBox} className="wrap process-phone">
+      <div className="process-sticky">
+        <div className="process-head">
+          <Reveal><h2 className="h1">Our Process</h2></Reveal>
+          <Reveal delay={0.1}><p className="lead">{PROCESS_TEXT}</p></Reveal>
+        </div>
+        <motion.div ref={list} className="process-list" style={{ x }}>
+          {PROCESS.map((p, i) => <ProcessCard key={p.n} p={p} i={i} />)}
+        </motion.div>
+      </div>
+      <div className="process-spacer" />
+    </div>
+  );
+}
+
+export function Process() {
+  const desktop = useIsDesktop();
+
+  return (
     <section className="process">
       {desktop ? (
         <div className="wrap process-desk">
           <div className="process-head">
-            <Reveal><h1 className="h1">Our<br />Process</h1></Reveal>
+            <Reveal><h2 className="h1">Our<br />Process</h2></Reveal>
             <Reveal delay={0.1} className="split-side process-side"><p className="lead">{PROCESS_TEXT}</p></Reveal>
           </div>
           {PROCESS.map((p, i) => (
@@ -134,18 +138,7 @@ export function Process() {
           ))}
         </div>
       ) : (
-        <div ref={trackBox} className="wrap process-phone">
-          <div className="process-sticky">
-            <div className="process-head">
-              <Reveal><h1 className="h1">Our Process</h1></Reveal>
-              <Reveal delay={0.1}><p className="lead">{PROCESS_TEXT}</p></Reveal>
-            </div>
-            <motion.div ref={list} className="process-list" style={{ x }}>
-              {PROCESS.map((p, i) => <ProcessCard key={p.n} p={p} i={i} />)}
-            </motion.div>
-          </div>
-          <div className="process-spacer" />
-        </div>
+        <ProcessPhone />
       )}
     </section>
   );
@@ -168,7 +161,7 @@ export function Values() {
     <div className="values">
       <div className="wrap">
         <div className="split-head values-head">
-          <Reveal><h1 className="h1">Our Values</h1></Reveal>
+          <Reveal><h2 className="h1">Our Values</h2></Reveal>
           <Reveal delay={0.1} className="split-side values-side"><p className="lead">{VALUES_TEXT}</p></Reveal>
         </div>
         <div className="values-grid">
@@ -271,7 +264,7 @@ function WorkCard({ p, index, listRef }: { p: (typeof PROJECTS)[number]; index: 
   return (
     <motion.div style={{ scale }} className="work-card-motion">
       <Reveal>
-        <Link href="/work/" className="work-card">
+        <Link href={p.url} target="_blank" rel="noopener noreferrer" className="work-card">
           <div className="work-body">
             <h3 className="h3">{p.name}</h3>
             <p className="work-text">{p.text}</p>
@@ -285,7 +278,7 @@ function WorkCard({ p, index, listRef }: { p: (typeof PROJECTS)[number]; index: 
               <p className="work-label">Services:</p>
               <div className="work-values">{p.services.map((x) => <span key={x} className="dot-item"><i />{x}</span>)}</div>
             </div>
-            <FakeButton label="See the Work / Case Studies" />
+            <FakeButton label="Visit the Live Site" />
           </div>
           <Art kind={p.art} className="work-photo" />
         </Link>
@@ -300,7 +293,7 @@ export function Work({ first = false }: { first?: boolean }) {
     <section className={`work ${first ? "work-first" : ""}`}>
       <div className="wrap">
         <div className="work-head">
-          <Head title="Work That Delivers Results" text={WORK_TEXT} />
+          <Head title="Work That Delivers Results" text={WORK_TEXT} tag={first ? "h1" : "h2"} />
         </div>
         <div ref={listRef} className="work-list">
           {PROJECTS.map((p, i) => (
@@ -322,10 +315,10 @@ function TestimonialCard({ t, left, top }: { t: (typeof TESTIMONIALS)[number]; l
   return (
     <Reveal className="testi-card" style={{ "--l": `${left}px`, "--t": `${top}px` } as CSSProperties}>
       <div className="stars">{[0, 1, 2, 3, 4].map((s) => <Star key={s} />)}</div>
-      <p className="testi-text">{t.text}</p>
       <p className="testi-bold">{t.bold}</p>
+      <p className="testi-text">&ldquo;{t.text}&rdquo;</p>
       <div className="testi-foot">
-        <Art kind="avatar" className="testi-avatar" />
+        <Avatar seed={t.name} className="testi-avatar" />
         <div>
           <p className="testi-name">{t.name}</p>
           <p className="testi-role">{t.role}</p>
@@ -342,8 +335,8 @@ export function Testimonials() {
       <div className="testi-title-wrap">
         <div className="testi-title">
           <Reveal>
-            <h1 className="h1">Trusted by</h1>
-            <h1 className="h1">Happy Clients.</h1>
+            <h2 className="h1">Trusted by</h2>
+            <h2 className="h1">Happy Clients.</h2>
             <p className="lead">{TESTIMONIAL_TEXT}</p>
           </Reveal>
         </div>
@@ -355,61 +348,9 @@ export function Testimonials() {
           <TestimonialCard t={TESTIMONIALS[2]} left={134} top={241} />
         </div>
         <div className="testi-col testi-col-b">
-          <TestimonialCard t={TESTIMONIALS[3]} left={47} top={331} />
-          <TestimonialCard t={TESTIMONIALS[4]} left={0} top={425} />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Pricing ---------- */
-
-export function Pricing() {
-  const [yearly, setYearly] = useState(false);
-  return (
-    <section className="pricing">
-      <div className="wrap">
-        <Head title="Simple, Transparent Pricing" text={PRICING_TEXT} />
-        <Reveal delay={0.1} className="switch-row">
-          <motion.button type="button" className="switch-label" animate={{ color: yearly ? "#0b2e1a" : "#0f7a3d" }} transition={uiSpring} onClick={() => setYearly(false)}>Monthly</motion.button>
-          <button type="button" className="switch" role="switch" aria-checked={yearly} aria-label="Bill yearly" onClick={() => setYearly((v) => !v)}>
-            <motion.span className="knob" animate={{ x: yearly ? 44 : 0 }} transition={uiSpring} />
-          </button>
-          <motion.button type="button" className="switch-label" animate={{ color: yearly ? "#0f7a3d" : "#0b2e1a" }} transition={uiSpring} onClick={() => setYearly(true)}>Yearly</motion.button>
-          <span className="off-pill">20% off</span>
-        </Reveal>
-        <div className="plans">
-          {PLANS.map((p) => (
-            <Reveal key={p.name} className={`plan ${p.popular ? "plan-dark" : ""}`}>
-              {p.popular && <span className="popular">Popular</span>}
-              <div className="plan-top">
-                <h3 className="h3">{p.name}</h3>
-                <p className="plan-tag">{p.tag}</p>
-                <div className="price">
-                  <span className="price-unit">AED</span>
-                  <AnimatePresence mode="wait" initial={false}>
-                    <motion.h2
-                      key={yearly ? "y" : "m"}
-                      className="price-num"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {yearly ? p.yearly : p.price}
-                    </motion.h2>
-                  </AnimatePresence>
-                  <span className="price-unit">{yearly ? "/yearly" : "/monthly"}</span>
-                </div>
-                <Button href="/contact/" label="Select Plan" variant={p.popular ? "onDark" : "outline"} arrow={false} block />
-              </div>
-              <div className="plan-feats">
-                <p className="plan-feats-title">Features:</p>
-                {p.features.map((f) => <div key={f} className="feat"><span className="dot-wrap"><i /></span><p>{f}</p></div>)}
-              </div>
-            </Reveal>
-          ))}
+          <TestimonialCard t={TESTIMONIALS[3]} left={47} top={180} />
+          <TestimonialCard t={TESTIMONIALS[4]} left={0} top={240} />
+          <TestimonialCard t={TESTIMONIALS[5]} left={60} top={240} />
         </div>
       </div>
     </section>
@@ -471,7 +412,7 @@ export function Blog() {
     <section className="blog">
       <div className="wrap">
         <div className="blog-head">
-          <Reveal><h1 className="h1 blog-title">Blog &amp; Insights That Drive Growth</h1></Reveal>
+          <Reveal><h2 className="h1 blog-title">Blog &amp; Insights That Drive Growth</h2></Reveal>
           <Reveal delay={0.1} className="blog-side">
             <p className="lead">{BLOG_TEXT}</p>
             <Button href="/blog/" label="See all Articles" />
@@ -521,7 +462,7 @@ export function Cta() {
             <img src="/art/growth.png" alt="Glass 3D bar chart icon" className="fill" />
           </SlowFloat>
         </Reveal>
-        <Reveal delay={0.1}><h1 className="h1">{CTA.title}</h1></Reveal>
+        <Reveal delay={0.1}><h2 className="h1">{CTA.title}</h2></Reveal>
         <Reveal delay={0.2}><p className="lead">{CTA.text}</p></Reveal>
         <Reveal delay={0.3}><Button href="/contact/" label="Contact Us" /></Reveal>
       </div>
@@ -554,7 +495,11 @@ export function Impact() {
                 {row.map((s, i) => (
                   <div key={s.label} className="cell">
                     <Reveal delay={(r * 2 + i) * 0.1} className="impact-stat">
-                      <CountUp to={s.value} suffix={s.suffix} className="impact-num" />
+                      {typeof s.value === "number" ? (
+                        <CountUp to={s.value} suffix={s.suffix} className="impact-num" />
+                      ) : (
+                        <span className="impact-num">{s.value}</span>
+                      )}
                       <h3 className="impact-label">{s.label}</h3>
                     </Reveal>
                   </div>
@@ -573,7 +518,7 @@ function Person({ p, i }: { p: (typeof ABOUT.people)[number]; i: number }) {
     <Reveal delay={(i % 4) * 0.1} className="person">
       <motion.div className="person-photo" initial="rest" animate="rest" whileHover="hover">
         <motion.div className="fill" variants={{ rest: { scale: 1 }, hover: { scale: 1.05 } }} transition={uiSpring}>
-          <Art kind={p.art} className="fill" alt={`Placeholder portrait for ${p.name}`} />
+          <Avatar seed={p.name} className="fill" />
         </motion.div>
         <motion.div className="person-social" variants={{ rest: { opacity: 0, y: 64 }, hover: { opacity: 1, y: 0 } }} transition={uiSpring}>
           {["in", "ig", "x"].map((s) => <Icon key={s} name={`soc-${s}`} size={40} alt="" />)}
@@ -614,7 +559,7 @@ export function WhyGravio() {
     <section className="why">
       <Art kind="motion" className="fill" alt="" />
       <div className="wrap why-inner">
-        <Reveal><h1 className="h1">Why Gravio?</h1><p className="lead">{ABOUT.whyText}</p></Reveal>
+        <Reveal><h2 className="h1">Why Gravio?</h2><p className="lead">{ABOUT.whyText}</p></Reveal>
         <div className="why-list" onMouseLeave={() => setHovered(-1)}>
           {ABOUT.why.map((w, i) => (
             <Reveal key={w.label} delay={i * 0.05}>
@@ -636,35 +581,3 @@ export function WhyGravio() {
     </section>
   );
 }
-
-/* ---------- Pricing page: comparison table ---------- */
-
-function Mark({ kind }: { kind: string }) {
-  if (kind === "x") return <Icon name="cross" alt="Not included" />;
-  if (kind === "1") return <Icon name="tick" alt="Included" />;
-  if (kind === "2") return <span className="ticks"><Icon name="tick" alt="Included" /><Icon name="tick" alt="" /></span>;
-  return <p>{kind}</p>;
-}
-
-export function Compare() {
-  return (
-    <section className="compare">
-      <div className="wrap">
-        <div className="compare-head">
-          <Head title={COMPARE.title} text={COMPARE.text} />
-        </div>
-        <Reveal delay={0.1} className="compare-table">
-          <div className="compare-row compare-top">
-            {COMPARE.head.map((h) => <div key={h} className="compare-cell"><h3 className="h3">{h}</h3></div>)}
-          </div>
-          {COMPARE.rows.map((row) => (
-            <div key={row[0]} className="compare-row">
-              {row.map((c, i) => <div key={i} className="compare-cell"><Mark kind={c} /></div>)}
-            </div>
-          ))}
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-

@@ -1,5 +1,7 @@
 // Descriptions of the Lummi images in public/art. See IMAGE_SOURCES.md.
 export const ART_ALT: Record<string, string> = {
+  "work-rutgold": "Rut Gold website homepage",
+  "work-modeltree": "Model Tree website homepage",
   "hero": "Wrapped in Green",
   "flame1": "Silhouette Against Green Wall",
   "flame2": "Profile Portrait Against Gradient Background",

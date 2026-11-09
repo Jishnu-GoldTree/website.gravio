@@ -11,7 +11,9 @@ export function ContactForm() {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const value = (key: string) => String(data.get(key) ?? "").trim();
-    const body = [
+    const text = [
+      "Hi Gravio, I'd like to start a project.",
+      "",
       `Name: ${value("name")}`,
       `Email: ${value("email")}`,
       `Phone: ${value("phone") || "Not given"}`,
@@ -19,8 +21,11 @@ export function ContactForm() {
       "",
       value("message"),
     ].join("\n");
-    // No mail service is connected yet, so the visitor's own mail app sends the message.
-    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(`Website enquiry from ${value("name")}`)}&body=${encodeURIComponent(body)}`;
+    // The enquiry opens as a prefilled WhatsApp chat with Gravio; the visitor taps send.
+    const url = `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(text)}`;
+    const tab = window.open(url, "_blank");
+    if (tab) tab.opener = null;
+    else window.location.href = url; // Popup blocked: open WhatsApp in this tab instead.
     setOpened(true);
   };
 
@@ -48,9 +53,9 @@ export function ContactForm() {
         Message
         <textarea name="message" required rows={5} placeholder="Tell us about your brand and goals" />
       </label>
-      <SubmitButton label="Send Message" onLight />
+      <SubmitButton label="Send on WhatsApp" onLight />
       <p className="contact-status" role="status">
-        {opened ? `Your email app should now open with this message, ready to send to ${CONTACT.email}.` : ""}
+        {opened ? `WhatsApp should now open with your message to ${CONTACT.phone}. Tap send to reach us.` : ""}
       </p>
     </form>
   );

@@ -46,10 +46,11 @@ export function HomeHero() {
   return (
     <>
       <div className="hero">
+        <h1 className="sr-only">Elevate your marketing with Gravio, a brand, content and growth agency in Dubai</h1>
         <div className="hero-head">
           <motion.div className="hero-row" initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} transition={revealSpring(0)}>
-            <p>©2026</p>
-            <p>AGENCY</p>
+            <p>ELEVATE</p>
+            <p>YOUR</p>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} transition={revealSpring(0.1)}>
             <BigWord />
@@ -85,8 +86,8 @@ export function HomeHero() {
       </div>
       <section className="strip">
         <Ticker gap={35}>
-          {TICKER.map((t) => (
-            <li key={t} className="strip-item"><span className="strip-slash">/</span><span>{t}</span><i className="strip-rule" /></li>
+          {TICKER.map((t, i) => (
+            <li key={`${i}-${t}`} className="strip-item"><span className="strip-slash">/</span><span>{t}</span><i className="strip-rule" /></li>
           ))}
         </Ticker>
       </section>
@@ -158,6 +159,7 @@ export function ServicesTop() {
 export function AboutTop() {
   return (
     <section className="page-top about-top">
+      <h1 className="sr-only">About Gravio</h1>
       <div className="wrap eyebrow-row">
         <div className="cell"><Reveal><p className="lead eyebrow">{ABOUT.eyebrow}</p></Reveal></div>
         <div className="cell"><ScrollText text={ABOUT.reveal} className="manifesto-text" /></div>

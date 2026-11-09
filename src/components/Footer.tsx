@@ -69,8 +69,9 @@ export function Footer() {
         ))}
         <Reveal delay={0.5} className="foot-col foot-contact">
           <p className="foot-col-title">Have a question?</p>
-          <ContactLine icon="phone" title={CONTACT.phone} href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} note="Monday to Friday, 9am to 5pm" />
-          <ContactLine icon="mail" title={CONTACT.email} href={`mailto:${CONTACT.email}`} note="We aim to reply in 24 hours" />
+          <ContactLine icon="phone" title={CONTACT.phone} href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} note="Mobile, Monday to Friday, 9am to 5pm" />
+          <ContactLine icon="phone" title={CONTACT.landline} href={`tel:${CONTACT.landline.replace(/\s/g, "")}`} note="Office landline" />
+          <ContactLine icon="mail" title={CONTACT.email} href={`mailto:${CONTACT.email}`} note="We aim to reply within 2 working hours" />
         </Reveal>
       </div>
 
