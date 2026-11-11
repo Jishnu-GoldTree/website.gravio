@@ -6,6 +6,7 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode, type R
 import {
   ABOUT,
   BLOG,
+  CONTACT,
   BLOG_TEXT,
   CTA,
   FAQ_TABS,
@@ -285,9 +286,12 @@ const Star = () => <Icon name="star" size={22} alt="" />;
 function TestimonialCard({ t, left, top }: { t: (typeof TESTIMONIALS)[number]; left: number; top: number }) {
   return (
     <Reveal className="testi-card" style={{ "--l": `${left}px`, "--t": `${top}px` } as CSSProperties}>
-      <div className="stars">{[0, 1, 2, 3, 4].map((s) => <Star key={s} />)}</div>
+      <div className="testi-top">
+        <div className="stars" role="img" aria-label="Rated 5 out of 5">{[0, 1, 2, 3, 4].map((s) => <Star key={s} />)}</div>
+        <svg className="testi-quote" viewBox="0 0 48 36" aria-hidden="true"><path d="M0 36V22.6C0 9.9 6.2 2.4 18.6 0l2 4.6C14 6.4 10.7 10.2 10.5 16H20v20H0Zm28 0V22.6C28 9.9 34.2 2.4 46.6 0l2 4.6C42 6.4 38.7 10.2 38.5 16H48v20H28Z" /></svg>
+      </div>
       <p className="testi-bold">{t.bold}</p>
-      <p className="testi-text">&ldquo;{t.text}&rdquo;</p>
+      <p className="testi-text">{t.text}</p>
       <div className="testi-foot">
         <Avatar seed={t.name} className="testi-avatar" />
         <div>
@@ -336,26 +340,41 @@ export function Faq({ tight = false, end = false }: { tight?: boolean; end?: boo
   const [open, setOpen] = useState(0);
   return (
     <section className={`faq ${tight ? "faq-tight" : ""} ${end ? "faq-end" : ""}`}>
-      <div className="wrap">
-        <Head title="Frequently Asked Question" text={FAQ_TEXT} />
-        <Reveal delay={0.1} className="faq-tabs" >
-          {tabs.map((t) => (
-            <button key={t} type="button" className={`faq-tab ${t === tab ? "on" : ""}`} onClick={() => { setTab(t); setOpen(0); }}>
-              {t === tab && <motion.span layoutId={`faq-pill-${tight ? "a" : "b"}`} className="faq-pill" transition={uiSpring} />}
-              <span className="faq-tab-label">{t}</span>
-            </button>
-          ))}
-        </Reveal>
+      <div className="wrap faq-grid">
+        <div className="faq-side">
+          <Reveal>
+            <p className="faq-kicker">FAQ</p>
+            <h2 className="h1">Questions, answered</h2>
+            <p className="lead">{FAQ_TEXT}</p>
+          </Reveal>
+          <Reveal delay={0.1} className="faq-tabs">
+            {tabs.map((t) => (
+              <button key={t} type="button" className={`faq-tab ${t === tab ? "on" : ""}`} aria-pressed={t === tab} onClick={() => { setTab(t); setOpen(0); }}>
+                {t === tab && <motion.span layoutId={`faq-pill-${tight ? "a" : "b"}`} className="faq-pill" transition={uiSpring} />}
+                <span className="faq-tab-label">{t}</span>
+              </button>
+            ))}
+          </Reveal>
+          <Reveal delay={0.2} className="faq-help">
+            <p className="faq-help-title">Still have a question?</p>
+            <p className="faq-help-text">Message us and a strategist will reply, usually within 2 working hours.</p>
+            <div className="faq-help-links">
+              <a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener noreferrer" className="faq-help-btn">WhatsApp us</a>
+              <a href={`mailto:${CONTACT.email}`} className="faq-help-link">{CONTACT.email}</a>
+            </div>
+          </Reveal>
+        </div>
         <div className="faq-list">
           {FAQ_TABS[tab].map((item, i) => {
             const isOpen = open === i;
             return (
-              <Reveal key={`${tab}-${i}`} delay={i * 0.05} >
-                <motion.div className="faq-item" initial={false} animate={{ backgroundColor: isOpen ? "#0f7a3d" : "#ffffff" }} transition={uiSpring}>
+              <Reveal key={`${tab}-${i}`} delay={i * 0.05}>
+                <div className={`faq-item ${isOpen ? "open" : ""}`}>
                   <button type="button" className="faq-q" aria-expanded={isOpen} onClick={() => setOpen(isOpen ? -1 : i)}>
-                    <motion.span initial={false} animate={{ color: isOpen ? "#ffffff" : "#0b2e1a" }} transition={uiSpring}>{item.q}</motion.span>
-                    <motion.span className="faq-icon" initial={false} animate={{ backgroundColor: isOpen ? "#ffffff" : "#0b2e1a", rotate: isOpen ? 180 : 0 }} transition={uiSpring}>
-                      <Icon name={isOpen ? "minus" : "plus"} alt="Icon" />
+                    <span className="faq-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="faq-q-text">{item.q}</span>
+                    <motion.span className="faq-icon" initial={false} animate={{ rotate: isOpen ? 45 : 0 }} transition={uiSpring}>
+                      <Icon name="plus" alt="" />
                     </motion.span>
                   </button>
                   <AnimatePresence initial={false}>
@@ -365,7 +384,7 @@ export function Faq({ tight = false, end = false }: { tight?: boolean; end?: boo
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </motion.div>
+                </div>
               </Reveal>
             );
           })}
