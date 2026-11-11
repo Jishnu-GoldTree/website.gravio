@@ -5,7 +5,7 @@ import { LEGAL_UPDATED, PRIVACY } from "@/lib/legal";
 
 export const metadata: Metadata = pageMeta({
   path: "/privacy-policy/",
-  title: "Privacy Policy",
+  title: "Privacy Policy | Gravio",
   description:
     "How Gravio collects, uses and protects your information.",
 });

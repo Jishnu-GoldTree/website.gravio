@@ -8,9 +8,9 @@ import { CONTACT } from "@/lib/content";
 
 export const metadata: Metadata = pageMeta({
   path: "/contact/",
-  title: "Contact Us",
+  title: "Contact Gravio | Marketing Agency in Dubai",
   description:
-    "Start a project with Gravio. Call +971 55 896 4319, email marketing@gravio.ae, or visit us in Business Bay, Dubai.",
+    "Contact Gravio in Business Bay, Dubai, to discuss your brand, digital marketing or growth plans. Call +971 55 896 4319 or email marketing@gravio.ae.",
 });
 
 export default function ContactPage() {
@@ -20,7 +20,7 @@ export default function ContactPage() {
         <div className="wrap">
           <Reveal className="head-center">
             <h1 className="h1">Let&apos;s Talk</h1>
-            <p className="lead">Tell us about your brand and goals. We aim to reply within 2 working hours.</p>
+            <p className="lead">Contact Gravio in Business Bay, Dubai. Tell us about your brand and goals; we aim to reply within 2 working hours.</p>
           </Reveal>
           <div className="contact-grid">
             <Reveal className="contact-info">

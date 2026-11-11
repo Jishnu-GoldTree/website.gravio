@@ -4,7 +4,7 @@ import { SimplePage } from "@/components/SimplePage";
 
 export const metadata: Metadata = pageMeta({
   path: "/coming-soon/",
-  title: "Coming Soon",
+  title: "Coming Soon | Gravio",
   description:
     "Something new from Gravio is on its way.",
   noindex: true,

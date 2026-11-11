@@ -5,9 +5,9 @@ import { Cta, Faq, Impact, People, Values, WhyGravio } from "@/components/sectio
 
 export const metadata: Metadata = pageMeta({
   path: "/about/",
-  title: "About Us",
+  title: "About Gravio | Marketing Management Agency Dubai",
   description:
-    "Meet Gravio, a Dubai marketing agency of strategists, designers and media buyers building brands across the UAE and India since 2020.",
+    "Meet Gravio, a Dubai-based marketing management agency in Business Bay connecting strategy, creative work and digital execution for ambitious businesses.",
 });
 
 export default function AboutPage() {

@@ -127,7 +127,7 @@ export const SERVICES = [
     art: "s1",
     stat: "48+",
     statLabel: "projects done",
-    text: "Stories built to stop the scroll and spend that proves itself, across social, content, and paid channels for your audience.",
+    text: "Digital marketing in Dubai built to stop the scroll and spend that proves itself, across social media, content production, influencer and paid channels.",
     chips: ["Content Marketing", "Email Marketing Campaigns", "Analytics & Reporting"],
   },
   {
@@ -137,7 +137,7 @@ export const SERVICES = [
     art: "s2",
     stat: "35+",
     statLabel: "projects done",
-    text: "Identity that holds up under scrutiny: a clear visual system and guidelines your whole team can rally behind.",
+    text: "Visual identity design that holds up under scrutiny: a clear visual system and brand guidelines your whole team can rally behind.",
     chips: ["Brand Strategy & Discovery", "Logo Design Suite", "Color Palette & Typography"],
   },
   {
@@ -147,7 +147,7 @@ export const SERVICES = [
     art: "s3",
     stat: "26+",
     statLabel: "projects done",
-    text: "Sharp positioning and messaging that turn attention into loyalty, and give every campaign one clear direction to follow.",
+    text: "Brand strategy and positioning that turn attention into loyalty, and give every campaign one clear direction to follow.",
     chips: ["Logo Design", "Brand Identity System", "Typography & Color System"],
   },
   {
@@ -157,7 +157,7 @@ export const SERVICES = [
     art: "s4",
     stat: "31+",
     statLabel: "projects done",
-    text: "We plan, launch, and tune paid media around outcomes you can see in the numbers, so each dirham has a clear job.",
+    text: "Media planning and buying around outcomes you can see in the numbers, so each dirham of your UAE budget has a clear job.",
     chips: ["Media Strategy Planning", "Budget Strategy", "Channel Selection"],
   },
 ];
@@ -243,7 +243,7 @@ export const CTA = { title: "Ready to Grow Your Brand?", text: "Let's build some
 
 export const SERVICES_HERO = {
   title: "Drive measurable results through smart, targeted marketing strategies",
-  text: "Bringing trust, clarity, and long term value to your business growth",
+  text: "Marketing services in Dubai and across the UAE, bringing trust, clarity, and long term value to your business growth",
   eyebrow: "Opportunity",
   reveal: "Turn strategy into measurable growth with a clear roadmap, focused execution, and systems designed to scale so every action adds to stronger positioning, better performance, and long term results.",
   card1Title: "Growth Insight",

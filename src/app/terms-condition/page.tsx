@@ -5,7 +5,7 @@ import { LEGAL_UPDATED, TERMS } from "@/lib/legal";
 
 export const metadata: Metadata = pageMeta({
   path: "/terms-condition/",
-  title: "Terms & Conditions",
+  title: "Terms & Conditions | Gravio",
   description:
     "The terms that apply when you use the Gravio website and services.",
 });

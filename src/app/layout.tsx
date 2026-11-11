@@ -22,14 +22,14 @@ const display = Bebas_Neue({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "Gravio | Marketing Agency in Dubai, UAE", template: "%s | Gravio" },
+  title: { default: "360° Marketing Agency in Dubai | Gravio", template: "%s | Gravio" },
   description:
-    "Gravio is a Dubai marketing agency for brand, content and growth: brand strategy, visual identity, social media, digital marketing and media planning.",
+    "Gravio is a Dubai marketing agency bringing strategy, brand, digital campaigns and measurement together for businesses in the UAE and beyond.",
   applicationName: SITE_NAME,
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Gravio | Marketing Agency in Dubai, UAE",
-    description: "Brand, content and growth for ambitious brands, from Dubai.",
+    title: "360° Marketing Agency in Dubai | Gravio",
+    description: "Gravio is a Dubai marketing agency bringing strategy, brand, digital campaigns and measurement together for businesses in the UAE and beyond.",
     url: "/",
     siteName: SITE_NAME,
     locale: "en_AE",

@@ -6,9 +6,9 @@ import { SimplePage } from "@/components/SimplePage";
 
 export const metadata: Metadata = pageMeta({
   path: "/blog/",
-  title: "Blog",
+  title: "Marketing Insights for UAE & GCC Brands | Gravio",
   description:
-    "Marketing insights, strategy and growth tips from the Gravio team in Dubai.",
+    "Practical perspectives on brand strategy, marketing management, digital growth and customer experience in the UAE and GCC, from the Gravio team in Dubai.",
   noindex: !FEATURES.blog,
 });
 

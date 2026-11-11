@@ -6,9 +6,9 @@ import { Cta, Work } from "@/components/sections";
 
 export const metadata: Metadata = pageMeta({
   path: "/work/",
-  title: "Our Work",
+  title: "Our Work | Brand & Marketing Projects | Gravio",
   description:
-    "Selected Gravio projects, including e-commerce websites for Rut Gold and Model Tree. See how we help brands grow.",
+    "Explore Gravio's brand and marketing projects, including e-commerce websites for Rut Gold and Model Tree, and see how clear strategy shapes connected experiences.",
   noindex: !FEATURES.work,
 });
 

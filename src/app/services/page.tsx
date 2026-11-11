@@ -5,9 +5,9 @@ import { Cta, Faq, Services } from "@/components/sections";
 
 export const metadata: Metadata = pageMeta({
   path: "/services/",
-  title: "Marketing Services",
+  title: "Marketing Services in Dubai & the UAE | Gravio",
   description:
-    "Digital marketing, visual identity, brand strategy and media planning from Gravio, a full-service marketing agency in Dubai, UAE.",
+    "Explore Gravio's marketing services in Dubai and the UAE: digital marketing, visual identity, brand strategy and media planning, connected in one plan.",
 });
 
 export default function ServicesPage() {

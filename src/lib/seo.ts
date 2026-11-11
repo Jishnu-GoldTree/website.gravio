@@ -7,6 +7,7 @@ const OG_IMAGE = "/opengraph-image.png";
 
 /**
  * Metadata for one page. `path` uses the site's trailing-slash form ("/work/").
+ * `title` is the full browser title, brand included, as set in the SEO keyword map.
  * Thin placeholder pages pass `noindex` so they stay out of search results until they have content.
  */
 export function pageMeta({
@@ -20,9 +21,9 @@ export function pageMeta({
   description: string;
   noindex?: boolean;
 }): Metadata {
-  const fullTitle = title ? `${title} | ${SITE_NAME}` : undefined;
+  const fullTitle = title;
   return {
-    ...(title ? { title } : {}),
+    ...(title ? { title: { absolute: title } } : {}),
     description,
     alternates: { canonical: path },
     openGraph: {
@@ -52,7 +53,17 @@ export const ORGANIZATION_JSONLD = {
   logo: `${SITE_URL}/apple-icon.png`,
   image: `${SITE_URL}/opengraph-image.png`,
   description:
-    "Gravio is a Dubai marketing agency for brand, content and growth: brand strategy, visual identity, social media, digital marketing and media planning.",
+    "Gravio is a 360° marketing agency in Business Bay, Dubai, bringing brand strategy, visual identity, digital marketing, social media and media planning together for businesses in the UAE and beyond.",
+  knowsAbout: [
+    "Digital marketing",
+    "Brand strategy",
+    "Visual identity",
+    "Media planning",
+    "Social media marketing",
+    "Content production",
+    "Influencer marketing",
+    "Performance marketing",
+  ],
   email: CONTACT.email,
   telephone: CONTACT.phone.replace(/\s/g, ""),
   address: {
