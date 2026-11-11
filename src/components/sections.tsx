@@ -53,12 +53,16 @@ function Head({ title, text, tag = "h2" }: { title: ReactNode; text?: string; ta
 
 function ProcessCard({ p, i }: { p: (typeof PROCESS)[number]; i: number }) {
   return (
-    <div className={`process-card`}>
+    <div className="process-card">
       <Art kind={`flame${i + 1}`} className="fill" />
-      <p className="process-num">{p.n}</p>
+      <div className="process-scrim" aria-hidden="true" />
       <div className="process-body">
+        <p className="process-num" aria-hidden="true">{p.n}</p>
         <h3 className="h3">{p.title}</h3>
-        <p>{p.text}</p>
+        <p className="process-text">{p.text}</p>
+        <div className="process-steps" aria-hidden="true">
+          {PROCESS.map((_, k) => <span key={k} className={k <= i ? "on" : ""} />)}
+        </div>
       </div>
     </div>
   );
@@ -132,7 +136,10 @@ export function Values() {
   const [a, b, c] = VALUES;
   const cell = (v: typeof a, i: number) => (
     <Reveal key={v.title} delay={i * 0.1} className={`value-cell value-${v.icon}`}>
-      <Icon name={v.icon} size={72} />
+      <div className="value-top">
+        <span className="value-icon"><Icon name={v.icon} size={34} /></span>
+        <span className="value-num" aria-hidden="true">0{i}</span>
+      </div>
       <div>
         <p className="value-title">{v.title}</p>
         <p className="value-text">{v.text}</p>
@@ -147,7 +154,10 @@ export function Values() {
           <Reveal delay={0.1} className="split-side values-side"><p className="lead">{VALUES_TEXT}</p></Reveal>
         </div>
         <div className="values-grid">
-          <Reveal className="values-photo"><Art kind="team" className="fill" /></Reveal>
+          <Reveal className="values-photo">
+            <Art kind="team" className="fill" />
+            <p className="values-badge"><i className="hero-tag-dot" aria-hidden="true" />Strategists, designers and media buyers, one team</p>
+          </Reveal>
           {cell(b, 1)}
           {cell(a, 2)}
           {cell(c, 3)}

@@ -73,13 +73,14 @@ export const HERO_TAGS = [
 ];
 
 export const TICKER = [
-  "VISUAL IDENTITY",
-  "PERFORMANCE ADS",
-  "SOCIAL MEDIA",
-  "SEO & GROWTH",
-  "BRAND STRATEGY",
-  "DIGITAL MARKETING",
-  "VISUAL IDENTITY",
+  "Brand Strategy",
+  "Visual Identity",
+  "Digital Marketing",
+  "Media Planning",
+  "Social Media",
+  "Content Production",
+  "Performance Ads",
+  "Influencer Marketing",
 ];
 
 export const PLACES = ["SINCE 2020", "DUBAI", "UAE", "INDIA"];
@@ -103,17 +104,17 @@ export const VALUES = [
   {
     icon: "bulb",
     title: "Innovation",
-    text: "We have a passion for creative problem-solving. Every brief is a chance to build something that did not exist before, shaped by bold storytelling and the newest tools, so your brand sets the pace rather than follows it. New formats and channels get tested early, and kept only when they earn it.",
+    text: "Every brief is a chance to build something that did not exist before. We test new formats and channels early, and keep only what earns its place, so your brand sets the pace.",
   },
   {
     icon: "people",
     title: "Collaboration",
-    text: "We are a collective of specialists, not a one-trick shop. Strategists, designers, and media buyers work closely with your team from first call to launch, so every piece of work stays tied to the wider goal you set.",
+    text: "A collective of specialists, not a one-trick shop. Strategists, designers, and media buyers work with your team from first call to launch, tied to the goal you set.",
   },
   {
     icon: "link",
     title: "Integrity",
-    text: "We report honestly and speak plainly. Results are shared openly, good or bad, and every recommendation comes from what your brand needs, which builds the long-term trust that all of our work depends on, with every client we serve and each audience we reach.",
+    text: "We report honestly and speak plainly. Results are shared openly, good or bad, and every recommendation starts from what your brand actually needs.",
   },
 ];
 

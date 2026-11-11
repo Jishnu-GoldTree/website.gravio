@@ -13,26 +13,20 @@ import {
 } from "@/lib/content";
 import { Arrow, Button } from "./Button";
 import { Art } from "./Art";
+import Silk from "./Silk";
 import { CountUp, Reveal, revealSpring, ScrollText, Ticker } from "./motion";
 
-/** The huge headline: lettering filled with a flame-coloured sweep. */
+/** The huge headline word, stretched to the full width and filled with a white-to-mint sweep. */
 function BigWord() {
   return (
-    <svg className="bigword" viewBox="0 0 1320 274" role="img" aria-label="Marketing">
+    <svg className="bigword" viewBox="0 0 1320 274" aria-hidden="true" focusable="false">
       <defs>
         <linearGradient id="flame" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#05130c" />
-          <stop offset="0.13" stopColor="#0a5c2d" />
-          <stop offset="0.2" stopColor="#0f7a3d" />
-          <stop offset="0.38" stopColor="#34d473" />
-          <stop offset="0.47" stopColor="#0f7a3d" />
-          <stop offset="0.5" stopColor="#05130c" />
-          <stop offset="0.53" stopColor="#05130c" />
-          <stop offset="0.6" stopColor="#0f7a3d" />
-          <stop offset="0.76" stopColor="#34d473" />
-          <stop offset="0.86" stopColor="#0f7a3d" />
-          <stop offset="0.92" stopColor="#0a5c2d" />
-          <stop offset="1" stopColor="#05130c" />
+          <stop offset="0" stopColor="#ffffff" />
+          <stop offset="0.3" stopColor="#b6f0c6" />
+          <stop offset="0.5" stopColor="#ffffff" />
+          <stop offset="0.75" stopColor="#b6f0c6" />
+          <stop offset="1" stopColor="#ffffff" />
         </linearGradient>
       </defs>
       <text x="-14" y="272" fontFamily="var(--font-display)" fontSize="391" textLength="1348" lengthAdjust="spacingAndGlyphs" fill="url(#flame)">
@@ -46,18 +40,10 @@ export function HomeHero() {
   return (
     <>
       <div className="hero">
-        <h1 className="sr-only">Elevate your marketing with Gravio, a 360° marketing agency in Dubai</h1>
-        <div className="hero-head">
-          <motion.div className="hero-row" initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} transition={revealSpring(0)}>
-            <p>ELEVATE</p>
-            <p>YOUR</p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} transition={revealSpring(0.1)}>
-            <BigWord />
-          </motion.div>
-        </div>
         <div className="hero-panel">
-          <Art kind="hero" className="fill" />
+          <div className="hero-silk fill" aria-hidden="true">
+            <Silk color="#12924a" sheenColor="#34d473" speed={3} noiseIntensity={1.2} depth={0.5} sheen={0.8} glow={0.45} dpr={1.5} />
+          </div>
           <div className="hero-stats">
             {HERO_STATS.map((s, i) => (
               <Reveal key={s.label} delay={0.1 + i * 0.1} className="hero-stat">
@@ -66,6 +52,11 @@ export function HomeHero() {
               </Reveal>
             ))}
           </div>
+          <motion.h1 className="hero-title" initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} transition={revealSpring(0.1)}>
+            <span className="hero-row"><span>Elevate</span><span>your</span></span>
+            <span className="sr-only">marketing with Gravio, a 360° marketing agency in Dubai</span>
+            <BigWord />
+          </motion.h1>
           <div className="hero-bottom">
             <Reveal delay={0.3} className="hero-left">
               <p className="hero-text">{HERO_TEXT}</p>
@@ -77,7 +68,7 @@ export function HomeHero() {
             <Reveal delay={0.4} className="hero-tags">
               {HERO_TAGS.map((row) => (
                 <div key={row[0]} className="hero-tag-row">
-                  {row.map((t) => <p key={t} className="hero-tag">{t}</p>)}
+                  {row.map((t) => <p key={t} className="hero-tag"><i className="hero-tag-dot" aria-hidden="true" />{t}</p>)}
                 </div>
               ))}
             </Reveal>
@@ -85,9 +76,12 @@ export function HomeHero() {
         </div>
       </div>
       <section className="strip">
-        <Ticker gap={35}>
+        <Ticker gap={40} speed={40}>
           {TICKER.map((t, i) => (
-            <li key={`${i}-${t}`} className="strip-item"><span className="strip-slash">/</span><span>{t}</span><i className="strip-rule" /></li>
+            <li key={`${i}-${t}`} className="strip-item">
+              <span className={i % 2 ? "strip-word strip-outline" : "strip-word"}>{t}</span>
+              <svg className="strip-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.4 5.6 11.4 12 12-6.4.6-11.4 5.6-12 12-.6-6.4-5.6-11.4-12-12C6.4 11.4 11.4 6.4 12 0Z" /></svg>
+            </li>
           ))}
         </Ticker>
       </section>
