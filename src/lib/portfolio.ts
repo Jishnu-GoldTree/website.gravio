@@ -22,7 +22,7 @@ export type Project = {
 export const PORTFOLIO_TEXT =
   "Websites and digital experiences built for businesses across Dubai, the UAE and beyond, each shaped around how its customers find, compare and get in touch.";
 
-/** Unlisted projects, shown only at /portfolio/pvt/ (not linked anywhere, noindex, not in the sitemap). */
+/** Unlisted projects, shown only at /portfolio/pvt/ (not linked anywhere, noindex, not in the sitemap) after the public ones. */
 export const PRIVATE_PORTFOLIO: Project[] = [
   {
     slug: "aab-garage",
@@ -122,7 +122,7 @@ export const PRIVATE_PORTFOLIO: Project[] = [
   },
 ];
 
-/** Public projects, shown at /portfolio/. */
+/** Public projects, shown at /portfolio/ and first on /portfolio/pvt/. */
 export const PORTFOLIO: Project[] = [
   {
     slug: "rut-gold",

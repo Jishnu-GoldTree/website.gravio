@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Portfolio } from "@/components/Portfolio";
-import { PORTFOLIO_TEXT, PRIVATE_PORTFOLIO } from "@/lib/portfolio";
+import { PORTFOLIO, PORTFOLIO_TEXT, PRIVATE_PORTFOLIO } from "@/lib/portfolio";
 
 // Unlisted page: not linked from the site, left out of the sitemap, and kept out of search results.
 // It is still public to anyone who has the link.
@@ -10,5 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function PrivatePortfolioPage() {
-  return <Portfolio projects={PRIVATE_PORTFOLIO} text={PORTFOLIO_TEXT} />;
+  // The full portfolio: the public projects first, then the unlisted ones.
+  return <Portfolio projects={[...PORTFOLIO, ...PRIVATE_PORTFOLIO]} text={PORTFOLIO_TEXT} />;
 }
