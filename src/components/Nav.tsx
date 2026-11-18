@@ -26,7 +26,7 @@ export function Nav() {
     return () => document.removeEventListener("click", close);
   }, []);
 
-  const groups = [PAGE_GROUPS.main, PAGE_GROUPS.legal];
+  const groups = [PAGE_GROUPS.main, PAGE_GROUPS.services, PAGE_GROUPS.legal];
 
   return (
     <motion.nav

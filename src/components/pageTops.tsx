@@ -54,7 +54,7 @@ export function HomeHero() {
           </div>
           <motion.h1 className="hero-title" initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} transition={revealSpring(0.1)}>
             <span className="hero-row"><span>Elevate</span><span>your</span></span>
-            <span className="sr-only">marketing with Gravio, a 360° marketing agency in Dubai</span>
+            <span className="sr-only">marketing with Gravio, a brand, marketing and growth agency in Dubai</span>
             <BigWord />
           </motion.h1>
           <div className="hero-bottom">

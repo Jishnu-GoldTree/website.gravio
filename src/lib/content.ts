@@ -11,7 +11,7 @@ export const CONTACT = {
 };
 
 export const FOOTER_ABOUT =
-  "Gravio is a modern agency in Dubai focused on building brands through strategy, design, and marketing, creating systems that drive clarity, consistency, and real growth.";
+  "Gravio is a Dubai-based brand, content and growth agency. We help businesses build clearer brands, create more effective content and connect marketing activity to measurable growth.";
 
 // Sections switched off for now. Set to true to bring a section back everywhere:
 // its home page block, its page, its nav and footer links, and its sitemap entry.
@@ -25,6 +25,8 @@ export const NAV_LINKS = visible([
   { label: "Home", href: "/", desktopOnly: true },
   { label: "Services", href: "/services/" },
   { label: "Work", href: "/work/", desktopOnly: true },
+  { label: "Portfolio", href: "/portfolio/", desktopOnly: true },
+  { label: "Industries", href: "/industries/", desktopOnly: true },
   { label: "About", href: "/about/" },
   { label: "Blog", href: "/blog/", desktopOnly: true },
   { label: "Career", href: "/career/", desktopOnly: true },
@@ -37,10 +39,26 @@ export const PAGE_GROUPS = {
       { label: "About", href: "/about/" },
       { label: "Work", href: "/work/" },
       { label: "Services", href: "/services/" },
+      { label: "Portfolio", href: "/portfolio/" },
+      { label: "Industries", href: "/industries/" },
+      { label: "Markets", href: "/markets/" },
       { label: "Blog", href: "/blog/" },
       { label: "Career", href: "/career/" },
       { label: "Contact", href: "/contact/" },
     ]),
+  },
+  services: {
+    title: "Services",
+    links: [
+      { label: "Brand & Marketing Strategy", href: "/services/brand-marketing-strategy/" },
+      { label: "Paid & Performance", href: "/services/paid-campaigns-performance-marketing/" },
+      { label: "SEO & AI Search", href: "/services/seo-ai-search-visibility/" },
+      { label: "Social Media", href: "/services/social-media-community-marketing/" },
+      { label: "Production & Ads", href: "/services/media-production-product-shoots-advertisements/" },
+      { label: "Talent & Creators", href: "/services/models-talent-creator-collaboration/" },
+      { label: "Publishing & PR", href: "/services/media-publishing-pr-distribution/" },
+      { label: "AI & CRM Automation", href: "/services/ai-automation-customer-relationship-support/" },
+    ],
   },
   legal: {
     title: "Legal",
@@ -64,38 +82,38 @@ export const HERO_STATS = [
 ];
 
 export const HERO_TEXT =
-  "Brand strategy, content production, and performance marketing from Dubai, crafted to grow your market share";
+  "Gravio is a brand, content and growth agency in Dubai. We help businesses find their position, express it clearly and turn it into consistent activity across identity, content, social, search and paid media.";
 
 export const HERO_TAGS = [
-  ["Clarity in positioning"],
-  ["Performance-Driven Marketing"],
-  ["Media Planning", "Growth Systems"],
+  ["Brand & Strategy"],
+  ["Creative & Production"],
+  ["Growth & Distribution", "AI & CRM"],
 ];
 
 export const TICKER = [
   "Brand Strategy",
   "Visual Identity",
-  "Digital Marketing",
-  "Media Planning",
-  "Social Media",
   "Content Production",
-  "Performance Ads",
-  "Influencer Marketing",
+  "Social Media",
+  "Performance Marketing",
+  "SEO & AI Search",
+  "Product Shoots",
+  "Creator Collaboration",
 ];
 
-export const PLACES = ["SINCE 2020", "DUBAI", "UAE", "INDIA"];
+export const PLACES = ["SINCE 2020", "DUBAI", "UAE", "GCC"];
 
 export const MANIFESTO =
-  "We are distinct, never derivative. Every brand we touch gets a strategy of its own, shaped with data, and executed with care, until the numbers genuinely shift.";
+  "Build a brand people understand, and a marketing system that moves it forward. We replace disconnected activity with clear strategy, useful creative and evidence-led decisions.";
 
 export const PROCESS_TEXT =
-  "A clear four step framework that replaces guesswork with steady, measurable growth.";
+  "The Gravio growth framework: four steps that connect brand clarity, creative execution and performance before the budget goes live.";
 
 export const PROCESS = [
-  { n: "01", title: "Discover", text: "We study your brand, market, audience, and rivals to find what others overlook." },
-  { n: "02", title: "Strategize", text: "We map channels, budget, messaging, and milestones, before any spend goes live." },
-  { n: "03", title: "Execute", text: "Our strategists, creators, and media buyers launch every campaign with sharp detail." },
-  { n: "04", title: "Optimize", text: "We watch each metric, drop what fails, scale what wins, and report it all openly." },
+  { n: "01", title: "Discover", text: "We study the brand, market, audience and rivals to find the real constraint, not just the visible problem." },
+  { n: "02", title: "Strategize", text: "We define positioning, messaging, channels, budget logic and milestones before any spend begins." },
+  { n: "03", title: "Execute", text: "Strategists, creators, designers and media buyers turn the plan into content, campaigns and search work." },
+  { n: "04", title: "Optimize", text: "We keep what earns its place, fix what creates friction and scale only when evidence supports it." },
 ];
 
 export const VALUES_TEXT = "We back bold ideas and move them forward with sharp thinking";
@@ -118,48 +136,81 @@ export const VALUES = [
   },
 ];
 
-export const SERVICES_TEXT = "End to end solutions to build, grow, and scale your brand.";
+export const SERVICES_TEXT =
+  "Eight connected pillars. Strategy sets the direction, brand and content make it visible, and distribution and optimisation help it compound.";
 
 export const SERVICES = [
   {
     n: "01",
-    kicker: "Marketing Service",
-    title: "Digital Marketing",
-    art: "s1",
-    stat: "48+",
-    statLabel: "projects done",
-    text: "Digital marketing in Dubai built to stop the scroll and spend that proves itself, across social media, content production, influencer and paid channels.",
-    chips: ["Content Marketing", "Email Marketing Campaigns", "Analytics & Reporting"],
+    kicker: "Brand & Strategy",
+    title: "Brand Strategy & Analysis",
+    art: "s3",
+    href: "/services/brand-marketing-strategy/",
+    text: "We clarify what your brand stands for, who it is for, how it should be differentiated and what needs to change in the market.",
+    chips: ["Positioning", "Audience & Competitor Analysis", "Growth Roadmap"],
   },
   {
     n: "02",
-    kicker: "Design Service",
-    title: "Visual Identity",
+    kicker: "Brand & Strategy",
+    title: "Identity & Creative Systems",
     art: "s2",
-    stat: "35+",
-    statLabel: "projects done",
-    text: "Visual identity design that holds up under scrutiny: a clear visual system and brand guidelines your whole team can rally behind.",
-    chips: ["Brand Strategy & Discovery", "Logo Design Suite", "Color Palette & Typography"],
+    href: "/contact/",
+    text: "We turn strategic direction into a recognisable identity, with logo systems, typography, colour, campaign concepts and guidelines your teams can use consistently.",
+    chips: ["Visual Identity", "Logo Systems", "Brand Guidelines"],
   },
   {
     n: "03",
-    kicker: "Design Service",
-    title: "Brand Strategy",
-    art: "s3",
-    stat: "26+",
-    statLabel: "projects done",
-    text: "Brand strategy and positioning that turn attention into loyalty, and give every campaign one clear direction to follow.",
-    chips: ["Logo Design", "Brand Identity System", "Typography & Color System"],
+    kicker: "Creative & Production",
+    title: "Content & Media Production",
+    art: "s1",
+    href: "/services/media-production-product-shoots-advertisements/",
+    text: "We plan and produce content that gives your strategy something useful to say and show, from product shoots and advertisements to publishing workflows.",
+    chips: ["Product Shoots", "Video Ads", "Content Marketing"],
   },
   {
     n: "04",
-    kicker: "Media Service",
-    title: "Media Planning",
+    kicker: "Growth & Distribution",
+    title: "Social Media & Community",
     art: "s4",
-    stat: "31+",
-    statLabel: "projects done",
-    text: "Media planning and buying around outcomes you can see in the numbers, so each dirham of your UAE budget has a clear job.",
-    chips: ["Media Strategy Planning", "Budget Strategy", "Channel Selection"],
+    href: "/services/social-media-community-marketing/",
+    text: "A consistent social presence through content planning, creative direction, publishing and performance review, so each platform supports the wider objective.",
+    chips: ["Content Calendars", "Community Management", "Reporting"],
+  },
+  {
+    n: "05",
+    kicker: "Growth & Distribution",
+    title: "Paid & Performance Marketing",
+    art: "s1",
+    href: "/services/paid-campaigns-performance-marketing/",
+    text: "Media strategy, channel selection, budget planning, creative testing and reporting, structured around the outcome that matters, so each dirham has a clear job.",
+    chips: ["Media Planning", "Paid Search & Social", "Creative Testing"],
+  },
+  {
+    n: "06",
+    kicker: "Growth & Distribution",
+    title: "SEO & AI Search Visibility",
+    art: "s3",
+    href: "/services/seo-ai-search-visibility/",
+    text: "Search visibility built on useful information, sound technical foundations and clear commercial intent, ready for AI Overviews and other AI-led search.",
+    chips: ["Technical SEO", "Content Strategy", "AI Search Readiness"],
+  },
+  {
+    n: "07",
+    kicker: "AI & Customer Systems",
+    title: "AI Automation & CRM",
+    art: "s2",
+    href: "/services/ai-automation-customer-relationship-support/",
+    text: "Practical AI and automation workflows that reduce response friction: enquiry handling, lead routing, follow-up sequences and CRM-connected reporting.",
+    chips: ["Lead Routing", "WhatsApp & Email Flows", "CRM Mapping"],
+  },
+  {
+    n: "08",
+    kicker: "Creative & Production",
+    title: "Models, Talent & Platforms",
+    art: "s4",
+    href: "/services/models-talent-creator-collaboration/",
+    text: "Model, talent and creator collaboration for campaigns, plus a consistent brand presence across the platforms and directories where customers find you.",
+    chips: ["Casting", "Creator Partnerships", "Platform Presence"],
   },
 ];
 
@@ -202,11 +253,11 @@ export const FAQ_TEXT = "Frequently asked questions about Gravio's marketing ser
 
 export const FAQ_TABS: Record<string, { q: string; a: string }[]> = {
   General: [
-    { q: "What services does Gravio offer?", a: "Brand strategy and identity, content production, social media management, influencer marketing, and performance marketing, grouped under Brand, Content, and Growth." },
-    { q: "How do I start a project with Gravio?", a: "Reach out through the contact page or email us directly. We'll set up a call to understand your goals before scoping the work." },
-    { q: "Which industries do you work with?", a: "We work across FMCG, retail, beauty, hospitality, finance, and more, wherever a brand needs sharper identity and stronger reach." },
-    { q: "Where is Gravio based?", a: "We are based in Dubai, UAE, and serve clients across the region and in India." },
-    { q: "Do you work with early-stage brands?", a: "Yes. We work with brands at every stage, from first identity to scaled performance marketing." },
+    { q: "What does Gravio do?", a: "Gravio brings together brand strategy and identity, content and media production, social media, SEO and AI search, performance marketing, media planning, and AI-assisted customer systems, connected in one plan." },
+    { q: "Is Gravio a branding agency or a digital marketing agency?", a: "Both, but what matters is how the work connects. We start with positioning and strategy, then link identity, content, distribution and performance so your marketing has one coherent direction." },
+    { q: "Does Gravio work with businesses outside Dubai?", a: "Yes. Gravio is Dubai-based and supports businesses across the UAE, the GCC and international markets. The right scope depends on the audience, market, channels and operating requirements." },
+    { q: "Can Gravio help with SEO and AI search?", a: "Yes. We combine technical SEO, useful content and AI-search readiness for Google AI Overviews and AI Mode. No platform inclusion or ranking is guaranteed, and every recommendation is reviewed by people." },
+    { q: "How do we start a project?", a: "Start with a conversation about your objective, current challenge, audience, market and timing. We then recommend the right mix of strategy, creative, content, media and optimisation, rather than forcing every brief into the same package." },
   ],
   Features: [
     { q: "Can I hire you for one service only?", a: "Yes. Many clients start with one service, such as social media or paid media, and add more as results come in." },
@@ -244,7 +295,7 @@ export const CTA = { title: "Ready to Grow Your Brand?", text: "Let's build some
 
 export const SERVICES_HERO = {
   title: "Drive measurable results through smart, targeted marketing strategies",
-  text: "Marketing services in Dubai and across the UAE, bringing trust, clarity, and long term value to your business growth",
+  text: "Marketing services in Dubai, the UAE and the GCC: strategy, creative, distribution and customer systems working as one connected plan.",
   eyebrow: "Opportunity",
   reveal: "Turn strategy into measurable growth with a clear roadmap, focused execution, and systems designed to scale so every action adds to stronger positioning, better performance, and long term results.",
   card1Title: "Growth Insight",

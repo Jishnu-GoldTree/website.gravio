@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CONTACT, isHidden } from "./content";
+import { INDUSTRY_PATHS, SERVICE_PATHS } from "./pages";
 
 export const SITE_URL = "https://www.gravio.ae";
 export const SITE_NAME = "Gravio";
@@ -41,7 +42,21 @@ export function pageMeta({
 }
 
 /** Pages listed in the sitemap. Placeholder pages marked noindex are left out. */
-export const INDEXED_PAGES = ["/", "/services/", "/work/", "/about/", "/contact/", "/career/", "/privacy-policy/", "/terms-condition/"].filter((p) => !isHidden(p));
+export const INDEXED_PAGES = [
+  "/",
+  "/services/",
+  ...SERVICE_PATHS,
+  "/industries/",
+  ...INDUSTRY_PATHS,
+  "/markets/",
+  "/portfolio/",
+  "/work/",
+  "/about/",
+  "/contact/",
+  "/career/",
+  "/privacy-policy/",
+  "/terms-condition/",
+].filter((p) => !isHidden(p));
 
 /** schema.org description of the business, rendered once in the root layout. */
 export const ORGANIZATION_JSONLD = {
@@ -53,16 +68,22 @@ export const ORGANIZATION_JSONLD = {
   logo: `${SITE_URL}/apple-icon.png`,
   image: `${SITE_URL}/opengraph-image.png`,
   description:
-    "Gravio is a 360° marketing agency in Business Bay, Dubai, bringing brand strategy, visual identity, digital marketing, social media and media planning together for businesses in the UAE and beyond.",
+    "Gravio is a brand, content and growth agency in Business Bay, Dubai. Since 2020 it has brought brand strategy, design, content production, social media, SEO, paid media and AI-assisted customer systems together for businesses across the UAE, the GCC and international markets.",
   knowsAbout: [
-    "Digital marketing",
     "Brand strategy",
+    "Marketing strategy",
     "Visual identity",
-    "Media planning",
-    "Social media marketing",
     "Content production",
-    "Influencer marketing",
+    "Product photography",
+    "Video advertising",
+    "Social media marketing",
     "Performance marketing",
+    "Media planning",
+    "Search engine optimization",
+    "AI search visibility",
+    "Influencer marketing",
+    "Public relations",
+    "Marketing automation",
   ],
   email: CONTACT.email,
   telephone: CONTACT.phone.replace(/\s/g, ""),
@@ -72,7 +93,7 @@ export const ORGANIZATION_JSONLD = {
     addressLocality: "Dubai",
     addressCountry: "AE",
   },
-  areaServed: ["AE", "IN"],
+  areaServed: ["AE", "SA", "QA", "KW", "BH", "OM", "IN"],
   sameAs: ["https://www.instagram.com/graviomarketing"],
   contactPoint: [
     { "@type": "ContactPoint", telephone: CONTACT.phone.replace(/\s/g, ""), contactType: "sales", areaServed: "AE", availableLanguage: ["en"] },

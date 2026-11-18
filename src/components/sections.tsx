@@ -177,7 +177,7 @@ export function Services() {
       <Head title="What we offer / Service" text={SERVICES_TEXT} />
       <div className="service-list">
         {SERVICES.map((s) => (
-          <div key={s.n} className="service-row service-open" style={{ height: desktop ? 580 : "auto" }}>
+          <div key={s.n} className="service-row service-open" style={{ height: desktop ? 500 : "auto" }}>
             <div className="service-bg">
               <Art kind="streak" className="fill" alt="" />
             </div>
@@ -194,13 +194,12 @@ export function Services() {
                     <p className="service-kicker">{s.kicker}</p>
                     <h2 className="h2">{s.title}</h2>
                   </div>
-                  <Button href="/contact/" label="Start your project" variant="onDark" />
+                  <Button href={s.href} label={s.href === "/contact/" ? "Start your project" : "Explore service"} variant="onDark" />
                 </div>
                 <Reveal className="service-more">
-                  <div className="service-stat"><h2>{s.stat}</h2><h3>{s.statLabel}</h3></div>
                   <p className="service-text">{s.text}</p>
                   <div className="service-chips">
-                    {s.chips.map((c) => <h3 key={c} className="service-chip">{c}</h3>)}
+                    {s.chips.map((c) => <p key={c} className="service-chip">{c}</p>)}
                   </div>
                 </Reveal>
               </div>

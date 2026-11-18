@@ -5,6 +5,7 @@ import { MotionConfig } from "framer-motion";
 import { Footer } from "@/components/Footer";
 import { GlowLayer } from "@/components/GlowLayer";
 import { Nav } from "@/components/Nav";
+import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { ORGANIZATION_JSONLD, SITE_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
@@ -22,14 +23,14 @@ const display = Bebas_Neue({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "360° Marketing Agency in Dubai | Gravio", template: "%s | Gravio" },
+  title: { default: "Gravio | Brand, Marketing & Growth Agency in Dubai", template: "%s | Gravio" },
   description:
-    "Gravio is a Dubai marketing agency bringing strategy, brand, digital campaigns and measurement together for businesses in the UAE and beyond.",
+    "Gravio is a Dubai-based brand, content and growth agency helping ambitious businesses sharpen positioning, create stronger content and improve marketing performance across the UAE, GCC and international markets.",
   applicationName: SITE_NAME,
   alternates: { canonical: "/" },
   openGraph: {
-    title: "360° Marketing Agency in Dubai | Gravio",
-    description: "Gravio is a Dubai marketing agency bringing strategy, brand, digital campaigns and measurement together for businesses in the UAE and beyond.",
+    title: "Gravio | Brand, Marketing & Growth Agency in Dubai",
+    description: "Gravio is a Dubai-based brand, content and growth agency helping ambitious businesses sharpen positioning, create stronger content and improve marketing performance across the UAE, GCC and international markets.",
     url: "/",
     siteName: SITE_NAME,
     locale: "en_AE",
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <main>{children}</main>
           <Footer />
           <GlowLayer />
+          <WhatsAppFab />
         </MotionConfig>
       </body>
     </html>

@@ -7,7 +7,7 @@ export const metadata: Metadata = pageMeta({
   path: "/about/",
   title: "About Gravio | Marketing Management Agency Dubai",
   description:
-    "Meet Gravio, a Dubai-based marketing management agency in Business Bay connecting strategy, creative work and digital execution for ambitious businesses.",
+    "Meet Gravio, a Dubai-based brand, content and growth agency in Business Bay. Strategists, designers, creators and media specialists working as one team since 2020.",
 });
 
 export default function AboutPage() {

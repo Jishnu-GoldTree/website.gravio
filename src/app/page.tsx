@@ -7,9 +7,9 @@ import { Blog, Cta, Faq, Process, Services, Testimonials, Values, Work } from "@
 
 export const metadata: Metadata = pageMeta({
   path: "/",
-  title: "360° Marketing Agency in Dubai | Gravio",
+  title: "Gravio | Brand, Marketing & Growth Agency in Dubai",
   description:
-    "Gravio is a Dubai marketing agency bringing strategy, brand, digital campaigns and measurement together for businesses in the UAE and beyond.",
+    "Gravio is a Dubai-based brand, content and growth agency helping ambitious businesses sharpen positioning, create stronger content and improve marketing performance across the UAE, GCC and international markets.",
 });
 
 export default function Home() {

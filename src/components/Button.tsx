@@ -99,6 +99,7 @@ export function Button({
   return (
     <MotionLink
       href={href}
+      {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={`btn ${block ? "btn-block" : ""} ${className}`}
       initial="rest"
       animate="rest"
