@@ -858,3 +858,8 @@ img { display: block; }
 .wa-fab:hover .wa-fab-label, .wa-fab:focus-visible .wa-fab-label { opacity: 1; transform: translate(0, -50%); }
 @media (prefers-reduced-motion: reduce) { .wa-fab-pulse { animation: none; opacity: 0; } }
 @media (max-width: 809.98px) { .wa-fab { right: 16px; bottom: 16px; width: 54px; height: 54px; } .wa-fab svg { width: 27px; height: 27px; } }
+/* Fewer than three projects: centre the cards instead of leaving empty columns */
+@media (min-width: 810px) {
+  .pf-grid:has(> li:nth-child(2):last-child) { grid-template-columns: repeat(2, minmax(0, 384px)); justify-content: center; }
+  .pf-grid:has(> li:only-child) { grid-template-columns: minmax(0, 384px); justify-content: center; }
+}

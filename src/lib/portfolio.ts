@@ -1,6 +1,8 @@
 // Gravio portfolio. Copy is taken from each live site (read 13 Nov 2026).
 // `image` (card) and `banner` (panel) are optional: until mockups are added, a seeded SVG gradient stands in.
 // `scope` lists what Gravio delivered; fill it in per project once confirmed, it only renders when present.
+// Import this file only from server components: pages pass their own list to <Portfolio>, so the
+// private projects never ship in the public page's JavaScript.
 
 export type Project = {
   slug: string;
@@ -20,7 +22,8 @@ export type Project = {
 export const PORTFOLIO_TEXT =
   "Websites and digital experiences built for businesses across Dubai, the UAE and beyond, each shaped around how its customers find, compare and get in touch.";
 
-export const PORTFOLIO: Project[] = [
+/** Unlisted projects, shown only at /portfolio/pvt/ (not linked anywhere, noindex, not in the sitemap). */
+export const PRIVATE_PORTFOLIO: Project[] = [
   {
     slug: "aab-garage",
     name: "AAB Garage",
@@ -119,4 +122,30 @@ export const PORTFOLIO: Project[] = [
   },
 ];
 
-export const domainOf = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+/** Public projects, shown at /portfolio/. */
+export const PORTFOLIO: Project[] = [
+  {
+    slug: "rut-gold",
+    name: "Rut Gold",
+    url: "https://www.rutgold.com",
+    industry: "Jewellery",
+    location: "Dubai, UAE",
+    summary: "A gold and diamond jewellery store for wholesale, retail and custom 3D-modelled pieces.",
+    about:
+      "Rut Gold is a Dubai gold and diamond jewellery house serving wholesale, retail and custom clients. The site lets shoppers browse collections and the catalogue, share an idea to be modelled in 3D, and enquire straight over WhatsApp, with a separate route for B2B bulk supply.",
+    features: ["Collections and catalogue browsing", "Custom design requests modelled in 3D", "WhatsApp enquiries", "Dedicated B2B bulk supply route"],
+    offerings: ["Gold jewellery", "Diamond jewellery", "Wholesale supply", "Retail collections", "Custom 3D modelling"],
+  },
+  {
+    slug: "model-tree",
+    name: "Model Tree",
+    url: "https://modeltree.co.il",
+    industry: "Jewellery 3D Marketplace",
+    location: "Israel",
+    summary: "A platform in Israel for buying ready-to-cast jewellery 3D models, or commissioning custom ones.",
+    about:
+      "Model Tree is a marketplace for ready-to-cast 3D jewellery models, modelled in-house. Jewellers search the library, license and download models instantly, or commission a custom piece, with memberships, a bilingual interface and secure checkout in shekels.",
+    features: ["Searchable 3D model library", "Instant licence and download", "Custom model commissions", "Memberships", "Bilingual interface", "Secure checkout in shekels"],
+    offerings: ["Ready-to-cast 3D models", "Custom jewellery modelling", "Model licensing", "Memberships"],
+  },
+];

@@ -2,7 +2,9 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { domainOf, PORTFOLIO, PORTFOLIO_TEXT, type Project } from "@/lib/portfolio";
+import type { Project } from "@/lib/portfolio";
+
+const domainOf = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
 import { Button } from "./Button";
 import { Reveal, uiSpring } from "./motion";
 import { SeedArt } from "./SeedArt";
@@ -13,7 +15,7 @@ function Picture({ p, src, className }: { p: Project; src?: string; className: s
     // eslint-disable-next-line @next/next/no-img-element
     <img src={src} alt={`${p.name} website`} className={`${className} pf-img`} />
   ) : (
-    <SeedArt seed={p.slug} className={className} />
+    <SeedArt seed={p.slug} className={className} variant="tiles" />
   );
 }
 
@@ -28,7 +30,7 @@ const Chevron = ({ dir }: { dir: "left" | "right" }) => (
   </svg>
 );
 
-function Panel({ p, index, onClose, onStep }: { p: Project; index: number; onClose: () => void; onStep: (d: number) => void }) {
+function Panel({ p, index, total, onClose, onStep }: { p: Project; index: number; total: number; onClose: () => void; onStep: (d: number) => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
 
@@ -64,7 +66,7 @@ function Panel({ p, index, onClose, onStep }: { p: Project; index: number; onClo
       onKeyDown={onKeyDown}
     >
       <div className="pf-panel-bar">
-        <span className="pf-panel-count">{String(index + 1).padStart(2, "0")} / {String(PORTFOLIO.length).padStart(2, "0")}</span>
+        <span className="pf-panel-count">{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
         <div className="pf-panel-nav">
           <button type="button" className="pf-round" aria-label="Previous project" onClick={() => onStep(-1)}><Chevron dir="left" /></button>
           <button type="button" className="pf-round" aria-label="Next project" onClick={() => onStep(1)}><Chevron dir="right" /></button>
@@ -106,31 +108,32 @@ function Panel({ p, index, onClose, onStep }: { p: Project; index: number; onClo
   );
 }
 
-export function Portfolio() {
+/** Project grid with a slide-in detail panel. The page passes in the projects to show. */
+export function Portfolio({ projects, text }: { projects: Project[]; text: string }) {
   const [open, setOpen] = useState<number | null>(null);
   const opener = useRef<HTMLElement | null>(null);
 
   const show = useCallback((i: number | null) => {
     setOpen(i);
-    const hash = i === null ? "" : `#${PORTFOLIO[i].slug}`;
+    const hash = i === null ? "" : `#${projects[i].slug}`;
     history.replaceState(null, "", `${location.pathname}${location.search}${hash}`);
-  }, []);
+  }, [projects]);
   const close = useCallback(() => {
     show(null);
     opener.current?.focus();
   }, [show]);
   const step = useCallback((d: number) => setOpen((i) => {
     if (i === null) return i;
-    const n = (i + d + PORTFOLIO.length) % PORTFOLIO.length;
-    history.replaceState(null, "", `${location.pathname}${location.search}#${PORTFOLIO[n].slug}`);
+    const n = (i + d + projects.length) % projects.length;
+    history.replaceState(null, "", `${location.pathname}${location.search}#${projects[n].slug}`);
     return n;
-  }), []);
+  }), [projects]);
 
   // Open the project named in the URL hash, so a project link can be shared.
   useEffect(() => {
-    const i = PORTFOLIO.findIndex((p) => `#${p.slug}` === location.hash);
+    const i = projects.findIndex((p) => `#${p.slug}` === location.hash);
     if (i >= 0) setOpen(i);
-  }, []);
+  }, [projects]);
 
   useEffect(() => {
     if (open === null) return;
@@ -154,11 +157,11 @@ export function Portfolio() {
         <Reveal className="head-center pf-head">
           <p className="pf-kicker"><i className="hero-tag-dot" aria-hidden="true" />Portfolio</p>
           <h1 className="h1">Work we&apos;re proud of</h1>
-          <p className="lead">{PORTFOLIO_TEXT}</p>
+          <p className="lead">{text}</p>
         </Reveal>
 
         <ul className="pf-grid">
-          {PORTFOLIO.map((p, i) => (
+          {projects.map((p, i) => (
             <Reveal key={p.slug} as="li" delay={(i % 3) * 0.06}>
               <button
                 type="button"
@@ -196,7 +199,7 @@ export function Portfolio() {
               onClick={close}
               aria-hidden="true"
             />
-            <Panel key="panel" p={PORTFOLIO[open]} index={open} onClose={close} onStep={step} />
+            <Panel key="panel" p={projects[open]} index={open} total={projects.length} onClose={close} onStep={step} />
           </>
         )}
       </AnimatePresence>
