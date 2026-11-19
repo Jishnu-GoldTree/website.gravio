@@ -16,10 +16,17 @@ import { Art } from "./Art";
 import Silk from "./Silk";
 import { CountUp, Reveal, revealSpring, ScrollText, Ticker } from "./motion";
 
-/** The huge headline word, stretched to the full width and filled with a white-to-mint sweep. */
+/**
+ * The huge headline word, stretched to the full width and filled with a white-to-mint sweep.
+ * Drawn as Bebas Neue glyph outlines rather than SVG <text>: Safari lays out stretched text
+ * (textLength) differently and clipped the last letter, while a path renders the same everywhere.
+ */
+const BIGWORD_PATH =
+  "M41 -700H198L268 -199H270L340 -700H497V0H393V-530H391L311 0H219L139 -530H137V0H41ZM664 -700H813L927 0H817L797 -139V-137H672L652 0H550ZM784 -232 735 -578H733L685 -232ZM980 -700H1143Q1228 -700 1267 -660.5Q1306 -621 1306 -539V-496Q1306 -387 1234 -358V-356Q1274 -344 1290.5 -307Q1307 -270 1307 -208V-85Q1307 -55 1309 -36.5Q1311 -18 1319 0H1207Q1201 -17 1199 -32Q1197 -47 1197 -86V-214Q1197 -262 1181.5 -281Q1166 -300 1128 -300H1090V0H980ZM1130 -400Q1163 -400 1179.5 -417Q1196 -434 1196 -474V-528Q1196 -566 1182.5 -583Q1169 -600 1140 -600H1090V-400ZM1383 -700H1493V-405L1633 -700H1743L1612 -443L1745 0H1630L1537 -312L1493 -223V0H1383ZM1797 -700H2097V-600H1907V-415H2058V-315H1907V-100H2097V0H1797ZM2246 -600H2131V-700H2471V-600H2356V0H2246ZM2524 -700H2634V0H2524ZM2716 -700H2854L2961 -281H2963V-700H3061V0H2948L2816 -511H2814V0H2716ZM3135 -166V-534Q3135 -619 3177 -664.5Q3219 -710 3299 -710Q3379 -710 3421 -664.5Q3463 -619 3463 -534V-474H3359V-541Q3359 -610 3302 -610Q3245 -610 3245 -541V-158Q3245 -90 3302 -90Q3359 -90 3359 -158V-295H3304V-395H3463V-166Q3463 -81 3421 -35.5Q3379 10 3299 10Q3219 10 3177 -35.5Q3135 -81 3135 -166Z";
+
 function BigWord() {
   return (
-    <svg className="bigword" viewBox="0 0 1320 274" aria-hidden="true" focusable="false">
+    <svg className="bigword" viewBox="41.0 -710.0 3422.0 720.0" preserveAspectRatio="none" aria-hidden="true" focusable="false">
       <defs>
         <linearGradient id="flame" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0" stopColor="#ffffff" />
@@ -29,9 +36,7 @@ function BigWord() {
           <stop offset="1" stopColor="#ffffff" />
         </linearGradient>
       </defs>
-      <text x="-14" y="272" fontFamily="var(--font-display)" fontSize="391" textLength="1348" lengthAdjust="spacingAndGlyphs" fill="url(#flame)">
-        MARKETING
-      </text>
+      <path d={BIGWORD_PATH} fill="url(#flame)" />
     </svg>
   );
 }
