@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useMotionValue, useMotionValueEvent, useScroll, useSpring, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useMotionValueEvent, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
 import {
@@ -105,28 +105,103 @@ function ProcessPhone() {
   );
 }
 
+/** One segment of the process progress track, filled as the scroll passes through its step. */
+function StepFill({ progress, i }: { progress: MotionValue<number>; i: number }) {
+  const scaleX = useTransform(progress, [i / PROCESS.length, (i + 1) / PROCESS.length], [0, 1]);
+  return <motion.span className="pp-step-fill" style={{ scaleX }} />;
+}
+
+/**
+ * Desktop layout: the section pins while the page scrolls through it. The active step widens to show its
+ * details and the others fold into numbered strips; a progress track above follows the scroll.
+ * Clicking a step or its strip scrolls to that step, so scroll position and the open step never disagree.
+ */
+function ProcessDesk() {
+  const track = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const { scrollYProgress } = useScroll({ target: track, offset: ["start start", "end end"] });
+  const fill = useSpring(scrollYProgress, { stiffness: 260, damping: 40 });
+  useMotionValueEvent(scrollYProgress, "change", (v) => setActive(Math.min(PROCESS.length - 1, Math.floor(v * PROCESS.length * 0.999))));
+
+  const go = (i: number) => {
+    const el = track.current;
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY;
+    const run = el.offsetHeight - window.innerHeight;
+    window.scrollTo({ top: top + (run * (i + 0.5)) / PROCESS.length, behavior: "smooth" });
+  };
+
+  return (
+    <div ref={track} className="pp-track">
+      <div className="pp-pin">
+        <div className="wrap pp-inner">
+          <div className="pp-head">
+            <Reveal>
+              <p className="pp-kicker"><i className="hero-tag-dot" aria-hidden="true" />How we work</p>
+              <h2 className="h1">Our Process</h2>
+            </Reveal>
+            <Reveal delay={0.1} className="pp-lead"><p className="lead">{PROCESS_TEXT}</p></Reveal>
+          </div>
+
+          <div className="pp-steps" role="tablist" aria-label="Process steps">
+            {PROCESS.map((p, i) => (
+              <button
+                key={p.n}
+                type="button"
+                role="tab"
+                aria-selected={active === i}
+                aria-controls={`pp-panel-${i}`}
+                className={`pp-step ${active === i ? "on" : ""} ${i < active ? "done" : ""}`}
+                onClick={() => go(i)}
+              >
+                <span className="pp-step-bar"><StepFill progress={fill} i={i} /></span>
+                <span className="pp-step-label"><b>{p.n}</b>{p.title}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="pp-panels">
+            {PROCESS.map((p, i) => {
+              const on = active === i;
+              return (
+                <div
+                  key={p.n}
+                  id={`pp-panel-${i}`}
+                  role="tabpanel"
+                  aria-label={`${p.n} ${p.title}`}
+                  className={`pp-panel ${on ? "on" : ""}`}
+                  onClick={() => !on && go(i)}
+                >
+                  <Art kind={`flame${i + 1}`} className="fill" />
+                  <div className="pp-scrim" aria-hidden="true" />
+                  <span className="pp-num" aria-hidden="true">{p.n}</span>
+                  <div className="pp-fold" aria-hidden={on}>
+                    <span className="pp-fold-title">{p.title}</span>
+                    <span className="pp-fold-plus" aria-hidden="true">+</span>
+                  </div>
+                  <div className="pp-body" aria-hidden={!on}>
+                    <h3 className="pp-title">{p.title}</h3>
+                    <p className="pp-text">{p.text}</p>
+                    <ul className="pp-outputs">
+                      {p.outputs.map((o) => <li key={o}>{o}</li>)}
+                    </ul>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Process() {
   const desktop = useIsDesktop();
 
   return (
-    <section className="process">
-      {desktop ? (
-        <div className="wrap process-desk">
-          <div className="process-head">
-            <Reveal><h2 className="h1">Our<br />Process</h2></Reveal>
-            <Reveal delay={0.1} className="split-side process-side"><p className="lead">{PROCESS_TEXT}</p></Reveal>
-          </div>
-          {PROCESS.map((p, i) => (
-            <div key={p.n} className="process-row">
-              {PROCESS.map((_, cell) => (
-                <div key={cell}>{cell === i && <ProcessCard p={p} i={i} />}</div>
-              ))}
-            </div>
-          ))}
-        </div>
-      ) : (
-        <ProcessPhone />
-      )}
+    <section className={`process ${desktop ? "process-pinned" : ""}`}>
+      {desktop ? <ProcessDesk /> : <ProcessPhone />}
     </section>
   );
 }

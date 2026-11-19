@@ -110,10 +110,10 @@ export const PROCESS_TEXT =
   "The Gravio growth framework: four steps that connect brand clarity, creative execution and performance before the budget goes live.";
 
 export const PROCESS = [
-  { n: "01", title: "Discover", text: "We study the brand, market, audience and rivals to find the real constraint, not just the visible problem." },
-  { n: "02", title: "Strategize", text: "We define positioning, messaging, channels, budget logic and milestones before any spend begins." },
-  { n: "03", title: "Execute", text: "Strategists, creators, designers and media buyers turn the plan into content, campaigns and search work." },
-  { n: "04", title: "Optimize", text: "We keep what earns its place, fix what creates friction and scale only when evidence supports it." },
+  { n: "01", title: "Discover", text: "We study the brand, market, audience and rivals to find the real constraint, not just the visible problem.", outputs: ["Brand & market audit", "Audience research", "Competitor review"] },
+  { n: "02", title: "Strategize", text: "We define positioning, messaging, channels, budget logic and milestones before any spend begins.", outputs: ["Positioning & messaging", "Channel & budget plan", "Milestones"] },
+  { n: "03", title: "Execute", text: "Strategists, creators, designers and media buyers turn the plan into content, campaigns and search work.", outputs: ["Identity & content", "Campaign launch", "Search work"] },
+  { n: "04", title: "Optimize", text: "We keep what earns its place, fix what creates friction and scale only when evidence supports it.", outputs: ["Performance reviews", "Testing", "Scaling what works"] },
 ];
 
 export const VALUES_TEXT = "We back bold ideas and move them forward with sharp thinking";
